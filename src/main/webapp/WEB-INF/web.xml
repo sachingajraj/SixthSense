@@ -5,15 +5,6 @@
          version="3.1">
     <display-name>SixthSense</display-name>
 
-    <!--<servlet>-->
-    <!--<servlet-name>productServlet</servlet-name>-->
-    <!--<servlet-class>com.inmobi.ifc.mptt.servlet.ProductServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>productServlet</servlet-name>-->
-    <!--<url-pattern>/products</url-pattern>-->
-    <!--</servlet-mapping>-->
-
     <servlet>
         <servlet-name>healthServlet</servlet-name>
         <servlet-class>com.seqhack.teamoc.sixthsense.servlet.HealthServlet</servlet-class>
