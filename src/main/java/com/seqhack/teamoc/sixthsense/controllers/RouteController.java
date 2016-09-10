@@ -32,11 +32,12 @@ public class RouteController {
     @RequestMapping("/user")
     public
     @ResponseBody
-    RouteApiResponse getRouteInfo(@RequestParam String sourceBeaconId, @RequestParam String destinationBeaconId) {
+    RouteApiResponse getRouteInfo(@RequestParam String sourceBeaconUuid, @RequestParam String minor, @RequestParam String major,
+                                  @RequestParam String destinationBeaconId) {
         String message;
         HttpStatus httpStatus;
         List<Step> routeSteps = null;
-        if (sourceBeaconId == null || sourceBeaconId.isEmpty() || destinationBeaconId == null || destinationBeaconId.isEmpty()) {
+        if (sourceBeaconUuid == null || sourceBeaconUuid.isEmpty() || destinationBeaconId == null || destinationBeaconId.isEmpty()) {
             message = "Beacon(s) id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
