@@ -44,6 +44,24 @@ public class BaseController {
         return Utils.createResponse(httpStatus, message);
     }
 
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    BaseApiResponse getBeaconInfo(@RequestParam String beaconId, @RequestParam String currentLocation,
+                                  @RequestParam String finalLocation) {
+        String message;
+        HttpStatus httpStatus;
+        if (currentLocation == null || currentLocation.isEmpty() || finalLocation == null || finalLocation.isEmpty()) {
+            message = "Beacon id absent in request.";
+            httpStatus = HttpStatus.BAD_REQUEST;
+        } else {
+            Integer current = Integer.parseInt(currentLocation) + 1;
+            message = current.toString();
+            httpStatus = HttpStatus.OK;
+        }
+        return Utils.createResponse(httpStatus, message);
+    }
+
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
