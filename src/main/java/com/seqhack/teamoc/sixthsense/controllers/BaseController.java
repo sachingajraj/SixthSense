@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -26,18 +27,18 @@ import java.util.List;
 @RequestMapping("/beacon")
 public class BaseController {
 
-    @RequestMapping(value = "/{beaconId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{currentLocation}/{finalLocation}", method = RequestMethod.GET)
     public
     @ResponseBody
-    BaseApiResponse getJobStatus(@PathVariable String beaconId) {
-
+    BaseApiResponse getJobStatus(@PathVariable String currentLocation, @PathVariable String finalLocation) {
         String message;
         HttpStatus httpStatus;
-        if (beaconId == null || beaconId.isEmpty()) {
+        if (currentLocation == null || currentLocation.isEmpty() || finalLocation == null || finalLocation.isEmpty()) {
             message = "Beacon id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
-            message = "Coooollll !!!!!";
+            Integer current = Integer.parseInt(currentLocation) + 1;
+            message = current.toString();
             httpStatus = HttpStatus.OK;
         }
         return Utils.createResponse(httpStatus, message);
