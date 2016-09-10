@@ -11,5 +11,7 @@ import java.util.List;
 public interface JpaService {
     Beacon getBeaconById(int id);
 
+    List<Beacon> getAllBeacons();
+
     List<AdjBeacon> getBeaconAdjList();
 }

@@ -30,6 +30,11 @@ public class JpaServiceImpl implements JpaService {
     }
 
     @Override
+    public List<Beacon> getAllBeacons() {
+        return beaconRepository.getAllBeacons();
+    }
+
+    @Override
     public List<AdjBeacon> getBeaconAdjList() {
         return adjBeaconRepository.getBeaconAdjList();
     }

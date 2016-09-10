@@ -105,6 +105,7 @@ public class BaseController {
             message = "Beacon id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
+
             sourceBeacon = new Beacon();
             sourceBeacon.setId(1);
             sourceBeacon.setUuid("111111");
