@@ -1,20 +1,40 @@
 package com.seqhack.teamoc.sixthsense.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by sachin.gajraj on 9/10/16.
  */
+@Entity
+@Table(name = "beacon")
 public class Beacon {
-    String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    int id;
+    @Column(name = "uuid")
     String uuid;
+    @Column(name = "major")
     String major;
+    @Column(name = "minor")
     String minor;
+    @Column(name = "beacon_location")
     String location;
+    @Column(name = "beacon_type")
+    String beaconType;
+    @Column(name = "obs_type")
+    String obsType;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -48,5 +68,21 @@ public class Beacon {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getBeaconType() {
+        return beaconType;
+    }
+
+    public void setBeaconType(String beaconType) {
+        this.beaconType = beaconType;
+    }
+
+    public String getObsType() {
+        return obsType;
+    }
+
+    public void setObsType(String obsType) {
+        this.obsType = obsType;
     }
 }

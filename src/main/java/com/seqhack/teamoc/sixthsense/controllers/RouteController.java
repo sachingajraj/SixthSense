@@ -42,7 +42,7 @@ public class RouteController {
             step1.setStep(1);
 
             Beacon source = new Beacon();
-            source.setId("1");
+            source.setId(1);
             source.setUuid("111111");
             source.setMajor("11");
             source.setMinor("12");
@@ -50,7 +50,7 @@ public class RouteController {
             step1.setSource(source);
 
             Beacon destination = new Beacon();
-            destination.setId("2");
+            destination.setId(2);
             destination.setUuid("222222");
             destination.setMajor("21");
             destination.setMinor("22");
@@ -63,7 +63,7 @@ public class RouteController {
             step2.setStep(2);
 
             source = new Beacon();
-            source.setId("2");
+            source.setId(2);
             source.setUuid("222222");
             source.setMajor("21");
             source.setMinor("22");
@@ -71,7 +71,7 @@ public class RouteController {
             step2.setSource(source);
 
             destination = new Beacon();
-            destination.setId("3");
+            destination.setId(3);
             destination.setUuid("333333");
             destination.setMajor("31");
             destination.setMinor("32");

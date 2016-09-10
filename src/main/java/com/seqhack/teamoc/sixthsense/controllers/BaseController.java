@@ -3,7 +3,9 @@ package com.seqhack.teamoc.sixthsense.controllers;
 import com.seqhack.teamoc.sixthsense.entity.Beacon;
 import com.seqhack.teamoc.sixthsense.reponse.BaseApiResponse;
 import com.seqhack.teamoc.sixthsense.reponse.BeaconApiResponse;
+import com.seqhack.teamoc.sixthsense.service.JpaService;
 import com.seqhack.teamoc.sixthsense.utils.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,6 +29,9 @@ import java.util.List;
 @RequestMapping("/beacon")
 public class BaseController {
 
+    @Autowired
+    JpaService jpaService;
+
     @RequestMapping(value = "/{currentLocation}/{finalLocation}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -37,6 +42,12 @@ public class BaseController {
             message = "Beacon id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
+            try {
+                Beacon beacon = jpaService.getBeaconById(1);
+                System.out.printf(beacon.getLocation());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Integer current = Integer.parseInt(currentLocation) + 1;
             message = current.toString();
             httpStatus = HttpStatus.OK;
@@ -93,7 +104,7 @@ public class BaseController {
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
             sourceBeacon = new Beacon();
-            sourceBeacon.setId("1");
+            sourceBeacon.setId(1);
             sourceBeacon.setUuid("111111");
             sourceBeacon.setMinor("11");
             sourceBeacon.setMajor("12");
@@ -103,11 +114,11 @@ public class BaseController {
             beacon.setUuid("222222");
             beacon.setMinor("21");
             beacon.setMajor("22");
-            beacon.setId("2");
+            beacon.setId(2);
             beacon.setLocation("Location 2");
 
             Beacon beacon1 = new Beacon();
-            beacon1.setId("3");
+            beacon1.setId(3);
             beacon1.setUuid("333333");
             beacon1.setMinor("31");
             beacon1.setMajor("32");
