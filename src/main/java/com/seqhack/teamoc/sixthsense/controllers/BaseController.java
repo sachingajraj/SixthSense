@@ -4,11 +4,18 @@ import com.seqhack.teamoc.sixthsense.reponse.BaseApiResponse;
 import com.seqhack.teamoc.sixthsense.utils.Utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.List;
 
 /**
  * Created by sachin.gajraj on 9/10/16.
@@ -30,9 +37,17 @@ public class BaseController {
             message = "Beacon id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
-            message = "Coooollll !! Looking for your beacon.";
-            httpStatus = HttpStatus.ACCEPTED;
+            message = "Coooollll !!!!!";
+            httpStatus = HttpStatus.OK;
         }
         return Utils.createResponse(httpStatus, message);
+    }
+
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public BaseApiResponse handleException(Exception e) {
+        return Utils.createResponse(HttpStatus.BAD_REQUEST, "Fail !!!!!");
     }
 }
