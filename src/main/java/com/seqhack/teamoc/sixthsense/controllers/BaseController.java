@@ -1,5 +1,6 @@
 package com.seqhack.teamoc.sixthsense.controllers;
 
+import com.seqhack.teamoc.sixthsense.entity.AdjBeacon;
 import com.seqhack.teamoc.sixthsense.entity.Beacon;
 import com.seqhack.teamoc.sixthsense.reponse.BaseApiResponse;
 import com.seqhack.teamoc.sixthsense.reponse.BeaconApiResponse;
@@ -44,6 +45,7 @@ public class BaseController {
         } else {
             try {
                 Beacon beacon = jpaService.getBeaconById(1);
+                List<AdjBeacon> adjBeacons = jpaService.getBeaconAdjList();
                 System.out.printf(beacon.getLocation());
             } catch (Exception e) {
                 e.printStackTrace();
