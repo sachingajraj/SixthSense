@@ -14,4 +14,8 @@ public class RouteHelper {
         BeaconDataHelper.getBeaconAdjacencyList();
         return new ArrayList<>();
     }
+
+    public static List<Beacon> getPossibleDestinations(Beacon source) {
+        return new ArrayList<>();
+    }
 }

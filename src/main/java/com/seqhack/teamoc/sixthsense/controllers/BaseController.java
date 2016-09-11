@@ -1,5 +1,6 @@
 package com.seqhack.teamoc.sixthsense.controllers;
 
+import com.seqhack.teamoc.sixthsense.data.RouteHelper;
 import com.seqhack.teamoc.sixthsense.entity.AdjBeacon;
 import com.seqhack.teamoc.sixthsense.entity.Beacon;
 import com.seqhack.teamoc.sixthsense.reponse.BaseApiResponse;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,32 +88,8 @@ public class BaseController {
             message = "Beacon id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
-
-            sourceBeacon = new Beacon();
-            sourceBeacon.setId(1);
-            sourceBeacon.setUuid("111111");
-            sourceBeacon.setMinor(1001);
-            sourceBeacon.setMajor(1);
-            sourceBeacon.setLocation("Location 1");
-
-            Beacon beacon = new Beacon();
-            beacon.setUuid("222222");
-            beacon.setMinor(1002);
-            beacon.setMajor(1);
-            beacon.setId(2);
-            beacon.setLocation("Location 2");
-
-            Beacon beacon1 = new Beacon();
-            beacon1.setId(3);
-            beacon1.setUuid("333333");
-            beacon1.setMinor(1003);
-            beacon1.setMajor(1);
-            beacon1.setLocation("Location 3");
-
-            destinationBeaconList = new ArrayList<>();
-            destinationBeaconList.add(beacon);
-            destinationBeaconList.add(beacon1);
-
+            sourceBeacon = jpaService.getBeaconByUuidMM(beaconUuid, Integer.parseInt(major), Integer.parseInt(minor));
+            destinationBeaconList = RouteHelper.getPossibleDestinations(sourceBeacon);
             message = "Possible Destinations.";
             httpStatus = HttpStatus.OK;
         }

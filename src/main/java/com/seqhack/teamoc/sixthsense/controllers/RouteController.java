@@ -46,7 +46,7 @@ public class RouteController {
             message = "Beacon(s) id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
-            
+
             Beacon source = jpaService.getBeaconByUuidMM(sourceBeaconUuid, Integer.parseInt(major), Integer.parseInt(minor));
             Beacon destination = BeaconDataHelper.getBeaconById(Integer.parseInt(destinationBeaconId));
 
