@@ -21,6 +21,7 @@ public class BeaconDataHelper {
 
     private static volatile Map<Integer, Beacon> beaconIdToBeaconMap = new HashMap<>();
     private static volatile List<AdjBeacon> beaconAdjacencyList = new ArrayList<>();
+    private static volatile List<Beacon> allBeaconsList = new ArrayList<>();
 
     private static JpaService staticJpaService;
 
@@ -38,6 +39,8 @@ public class BeaconDataHelper {
         if (allBeacons == null) {
             allBeacons = new ArrayList<>();
         }
+
+        allBeaconsList = allBeacons;
 
         Map<Integer, Beacon> newBeaconIdToBeaconMap = new HashMap<>();
         for (Beacon beacon : allBeacons) {
@@ -59,5 +62,9 @@ public class BeaconDataHelper {
 
     public static Beacon getBeaconById(int id) {
         return beaconIdToBeaconMap.get(id);
+    }
+
+    public static List<Beacon> getAllBeaconsList() {
+        return allBeaconsList;
     }
 }

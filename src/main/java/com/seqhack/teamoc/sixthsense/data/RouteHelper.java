@@ -29,7 +29,10 @@ public class RouteHelper {
     }
 
     public static List<Beacon> getPossibleDestinations(Beacon source) {
-        return new ArrayList<>();
+        List<Beacon> allBeacons = BeaconDataHelper.getAllBeaconsList();
+        Set<Beacon> allBeaconSet = new HashSet<>(allBeacons);
+        allBeaconSet.remove(source);
+        return new ArrayList<>(allBeaconSet);
     }
 
     public static String getStepMessage(Beacon stepSource, Beacon stepDest) {

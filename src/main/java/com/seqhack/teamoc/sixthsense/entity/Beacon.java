@@ -85,4 +85,33 @@ public class Beacon {
     public void setObsType(String obsType) {
         this.obsType = obsType;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Beacon beacon = (Beacon) o;
+
+        if (id != beacon.id) return false;
+        if (major != beacon.major) return false;
+        if (minor != beacon.minor) return false;
+        if (uuid != null ? !uuid.equals(beacon.uuid) : beacon.uuid != null) return false;
+        if (location != null ? !location.equals(beacon.location) : beacon.location != null) return false;
+        if (beaconType != null ? !beaconType.equals(beacon.beaconType) : beacon.beaconType != null) return false;
+        return obsType != null ? obsType.equals(beacon.obsType) : beacon.obsType == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
+        result = 31 * result + major;
+        result = 31 * result + minor;
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (beaconType != null ? beaconType.hashCode() : 0);
+        result = 31 * result + (obsType != null ? obsType.hashCode() : 0);
+        return result;
+    }
 }
