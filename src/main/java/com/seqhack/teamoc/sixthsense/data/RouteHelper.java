@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class RouteHelper {
     public static List<Step> getRoute(Beacon source, Beacon destination) {
+        BeaconDataHelper.getBeaconAdjacencyList();
         return new ArrayList<>();
     }
 }

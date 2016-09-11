@@ -16,6 +16,6 @@ public interface BeaconRepository extends PagingAndSortingRepository<Beacon, Str
     @Query(value = "select b from Beacon b where b.id = :id")
     public Beacon getBeaconById(@Param(value = "id") int id);
 
-    @Query(value = "select b from Beacon b;")
+    @Query(value = "select b from Beacon b")
     public List<Beacon> getAllBeacons();
 }

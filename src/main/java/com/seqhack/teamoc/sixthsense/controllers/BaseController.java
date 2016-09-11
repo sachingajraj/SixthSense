@@ -75,23 +75,6 @@ public class BaseController {
         return Utils.createResponse(httpStatus, message);
     }
 
-//    @RequestMapping(value = "/info", method = RequestMethod.GET)
-//    public
-//    @ResponseBody
-//    BaseApiResponse getBeaconInfo(@RequestParam String beaconId, @RequestParam String minor,
-//                                  @RequestParam String major) {
-//        String message;
-//        HttpStatus httpStatus;
-//        if (beaconId == null || beaconId.isEmpty()) {
-//            message = "Beacon id absent in request.";
-//            httpStatus = HttpStatus.BAD_REQUEST;
-//        } else {
-//            message = "";
-//            httpStatus = HttpStatus.OK;
-//        }
-//        return Utils.createResponse(httpStatus, message);
-//    }
-
     @RequestMapping(value = "/destinations", method = RequestMethod.GET)
     public
     @ResponseBody

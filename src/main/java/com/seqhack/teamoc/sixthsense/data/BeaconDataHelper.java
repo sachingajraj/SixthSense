@@ -5,7 +5,9 @@ import com.seqhack.teamoc.sixthsense.entity.Beacon;
 import com.seqhack.teamoc.sixthsense.service.JpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.Lifecycle;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,44 +16,41 @@ import java.util.Map;
 /**
  * Created by sachin.gajraj on 9/11/16.
  */
+@Component
 public class BeaconDataHelper {
 
     private static volatile Map<Integer, Beacon> beaconIdToBeaconMap = new HashMap<>();
     private static volatile List<AdjBeacon> beaconAdjacencyList = new ArrayList<>();
 
+    private static JpaService staticJpaService;
+
     @Autowired
-    private static JpaService jpaService;
+    JpaService jpaService;
+
+    @PostConstruct
+    public void initStaticService() {
+        staticJpaService = this.jpaService;
+    }
 
     public static void init() {
-        try {
-            List<Beacon> allBeacons = jpaService.getAllBeacons();
 
-            if (allBeacons == null) {
-                allBeacons = new ArrayList<>();
-            }
-
-            Map<Integer, Beacon> newBeaconIdToBeaconMap = new HashMap<>();
-            for (Beacon beacon : allBeacons) {
-                beaconIdToBeaconMap.put(beacon.getId(), beacon);
-            }
-            beaconIdToBeaconMap = newBeaconIdToBeaconMap;
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<Beacon> allBeacons = staticJpaService.getAllBeacons();
+        if (allBeacons == null) {
+            allBeacons = new ArrayList<>();
         }
 
-
-        try {
-            List<AdjBeacon> newBeaconAdjacencyList = jpaService.getBeaconAdjList();
-
-            if (newBeaconAdjacencyList == null) {
-                newBeaconAdjacencyList = new ArrayList<>();
-            }
-            beaconAdjacencyList = newBeaconAdjacencyList;
-        } catch (Exception e) {
-            e.printStackTrace();
+        Map<Integer, Beacon> newBeaconIdToBeaconMap = new HashMap<>();
+        for (Beacon beacon : allBeacons) {
+            newBeaconIdToBeaconMap.put(beacon.getId(), beacon);
         }
+        beaconIdToBeaconMap = newBeaconIdToBeaconMap;
 
 
+        List<AdjBeacon> newBeaconAdjacencyList = staticJpaService.getBeaconAdjList();
+        if (newBeaconAdjacencyList == null) {
+            newBeaconAdjacencyList = new ArrayList<>();
+        }
+        beaconAdjacencyList = newBeaconAdjacencyList;
     }
 
     public static List<AdjBeacon> getBeaconAdjacencyList() {
