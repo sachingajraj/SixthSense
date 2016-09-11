@@ -90,11 +90,7 @@ public class BaseController {
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
             sourceBeacon = jpaService.getBeaconByUuidMM(sourceBeaconUuid, Integer.parseInt(major), Integer.parseInt(minor));
-            List<Beacon> tempList = RouteHelper.getPossibleDestinations(sourceBeacon);
-            for (Beacon beacon: tempList){
-                destinationBeaconList.add(jpaService.getBeaconByUuidMM(beacon.getUuid(), beacon.getMajor(), beacon.getMinor()));
-            }
-//            destinationBeaconList = RouteHelper.getPossibleDestinations(sourceBeacon);
+            destinationBeaconList = RouteHelper.getPossibleDestinations(sourceBeacon);
             message = "Possible Destinations.";
             httpStatus = HttpStatus.OK;
         }

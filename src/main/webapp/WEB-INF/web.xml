@@ -15,6 +15,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>refreshServlet</servlet-name>
+        <servlet-class>com.seqhack.teamoc.sixthsense.servlet.RefreshServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>refreshServlet</servlet-name>
+        <url-pattern>/refresh</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
