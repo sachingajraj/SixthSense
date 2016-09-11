@@ -24,6 +24,11 @@ public class RouteHelper {
             Step step = new Step(i, stepSource, stepDest, stepMessage);
             stepList.add(step);
         }
+        Beacon stepSource = BeaconDataHelper.getBeaconById(pathIds.get(pathIds.size() - 1));
+        Beacon stepDest = null;
+        String stepMessage = getStepMessage(stepSource, stepDest);
+        Step step = new Step(pathIds.size(), stepSource, stepDest, stepMessage);
+        stepList.add(step);
 
         return stepList;
     }
@@ -36,8 +41,12 @@ public class RouteHelper {
     }
 
     public static String getStepMessage(Beacon stepSource, Beacon stepDest) {
+        if (stepSource != null && stepDest == null) {
+            return "Final Destination Reached.";
+        }
+
         for (int i = 0; i < adjBeaconList.size(); ++i) {
-            if (stepSource.getId() == adjBeaconList.get(i).getBid() && stepDest.getId() == adjBeaconList.get(i).getAdjBid()) {
+            if (stepSource != null && stepSource.getId() == adjBeaconList.get(i).getBid() && stepDest.getId() == adjBeaconList.get(i).getAdjBid()) {
                 return adjBeaconList.get(i).getTransitionMessage();
             }
         }
