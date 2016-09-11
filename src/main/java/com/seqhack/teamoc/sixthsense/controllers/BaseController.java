@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,14 +83,18 @@ public class BaseController {
                                                 @RequestParam String major) {
         String message;
         HttpStatus httpStatus;
-        List<Beacon> destinationBeaconList = null;
+        List<Beacon> destinationBeaconList = new ArrayList<>();
         Beacon sourceBeacon = null;
         if (sourceBeaconUuid == null || sourceBeaconUuid.isEmpty()) {
             message = "Beacon id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
             sourceBeacon = jpaService.getBeaconByUuidMM(sourceBeaconUuid, Integer.parseInt(major), Integer.parseInt(minor));
-            destinationBeaconList = RouteHelper.getPossibleDestinations(sourceBeacon);
+            List<Beacon> tempList = RouteHelper.getPossibleDestinations(sourceBeacon);
+            for (Beacon beacon: tempList){
+                destinationBeaconList.add(jpaService.getBeaconByUuidMM(beacon.getUuid(), beacon.getMajor(), beacon.getMinor()));
+            }
+//            destinationBeaconList = RouteHelper.getPossibleDestinations(sourceBeacon);
             message = "Possible Destinations.";
             httpStatus = HttpStatus.OK;
         }
