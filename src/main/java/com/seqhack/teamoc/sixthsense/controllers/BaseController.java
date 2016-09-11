@@ -92,22 +92,22 @@ public class BaseController {
             sourceBeacon = new Beacon();
             sourceBeacon.setId(1);
             sourceBeacon.setUuid("111111");
-            sourceBeacon.setMinor("11");
-            sourceBeacon.setMajor("12");
+            sourceBeacon.setMinor(1001);
+            sourceBeacon.setMajor(1);
             sourceBeacon.setLocation("Location 1");
 
             Beacon beacon = new Beacon();
             beacon.setUuid("222222");
-            beacon.setMinor("21");
-            beacon.setMajor("22");
+            beacon.setMinor(1002);
+            beacon.setMajor(1);
             beacon.setId(2);
             beacon.setLocation("Location 2");
 
             Beacon beacon1 = new Beacon();
             beacon1.setId(3);
             beacon1.setUuid("333333");
-            beacon1.setMinor("31");
-            beacon1.setMajor("32");
+            beacon1.setMinor(1003);
+            beacon1.setMajor(1);
             beacon1.setLocation("Location 3");
 
             destinationBeaconList = new ArrayList<>();

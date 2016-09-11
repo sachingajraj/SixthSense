@@ -30,6 +30,11 @@ public class JpaServiceImpl implements JpaService {
     }
 
     @Override
+    public Beacon getBeaconByUuidMM(String uuid, int major, int minor) {
+        return beaconRepository.getBeaconByUuidMM(uuid, major, minor);
+    }
+
+    @Override
     public List<Beacon> getAllBeacons() {
         return beaconRepository.getAllBeacons();
     }

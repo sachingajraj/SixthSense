@@ -20,9 +20,9 @@ public class Beacon {
     @Column(name = "uuid")
     String uuid;
     @Column(name = "major")
-    String major;
+    int major;
     @Column(name = "minor")
-    String minor;
+    int minor;
     @Column(name = "beacon_location")
     String location;
     @Column(name = "beacon_type")
@@ -46,19 +46,19 @@ public class Beacon {
         this.uuid = uuid;
     }
 
-    public String getMajor() {
+    public int getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
+    public void setMajor(int major) {
         this.major = major;
     }
 
-    public String getMinor() {
+    public int getMinor() {
         return minor;
     }
 
-    public void setMinor(String minor) {
+    public void setMinor(int minor) {
         this.minor = minor;
     }
 

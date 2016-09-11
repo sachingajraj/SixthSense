@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by sachin.gajraj on 9/10/16.
@@ -29,8 +30,6 @@ import java.util.List;
 @ControllerAdvice
 @RequestMapping("/route")
 public class RouteController {
-
-    private static
 
     @Autowired
     JpaService jpaService;
@@ -47,14 +46,8 @@ public class RouteController {
             message = "Beacon(s) id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
-
-            Beacon source = new Beacon();
-            source.setId(1);
-            source.setUuid("111111");
-            source.setMajor("11");
-            source.setMinor("12");
-            source.setLocation("Location 1");
-
+            
+            Beacon source = jpaService.getBeaconByUuidMM(sourceBeaconUuid, Integer.parseInt(major), Integer.parseInt(minor));
             Beacon destination = BeaconDataHelper.getBeaconById(Integer.parseInt(destinationBeaconId));
 
             routeSteps = RouteHelper.getRoute(source, destination);
