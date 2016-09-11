@@ -18,9 +18,9 @@ public class AdjBeacon {
     @Column(name = "id")
     int id;
     @Column(name = "bid")
-    String bid;
+    int bid;
     @Column(name = "next_bid")
-    String adjBid;
+    int adjBid;
     @Column(name = "trans_msg")
     String transitionMessage;
 
@@ -32,19 +32,19 @@ public class AdjBeacon {
         this.id = id;
     }
 
-    public String getBid() {
+    public int getBid() {
         return bid;
     }
 
-    public void setBid(String bid) {
+    public void setBid(int bid) {
         this.bid = bid;
     }
 
-    public String getAdjBid() {
+    public int getAdjBid() {
         return adjBid;
     }
 
-    public void setAdjBid(String adjBid) {
+    public void setAdjBid(int adjBid) {
         this.adjBid = adjBid;
     }
 

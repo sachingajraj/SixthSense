@@ -9,6 +9,13 @@ public class Step {
     Beacon destination;
     String voiceText;
 
+    public Step(int step, Beacon source, Beacon destination, String voiceText){
+        this.step = step;
+        this.source = source;
+        this.destination = destination;
+        this.voiceText = voiceText;
+    }
+
     public int getStep() {
         return step;
     }
