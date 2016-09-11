@@ -78,17 +78,17 @@ public class BaseController {
     @RequestMapping(value = "/destinations", method = RequestMethod.GET)
     public
     @ResponseBody
-    BeaconApiResponse getDestinationsFromBeacon(@RequestParam String beaconUuid, @RequestParam String minor,
+    BeaconApiResponse getDestinationsFromBeacon(@RequestParam String sourceBeaconUuid, @RequestParam String minor,
                                                 @RequestParam String major) {
         String message;
         HttpStatus httpStatus;
         List<Beacon> destinationBeaconList = null;
         Beacon sourceBeacon = null;
-        if (beaconUuid == null || beaconUuid.isEmpty()) {
+        if (sourceBeaconUuid == null || sourceBeaconUuid.isEmpty()) {
             message = "Beacon id absent in request.";
             httpStatus = HttpStatus.BAD_REQUEST;
         } else {
-            sourceBeacon = jpaService.getBeaconByUuidMM(beaconUuid, Integer.parseInt(major), Integer.parseInt(minor));
+            sourceBeacon = jpaService.getBeaconByUuidMM(sourceBeaconUuid, Integer.parseInt(major), Integer.parseInt(minor));
             destinationBeaconList = RouteHelper.getPossibleDestinations(sourceBeacon);
             message = "Possible Destinations.";
             httpStatus = HttpStatus.OK;
