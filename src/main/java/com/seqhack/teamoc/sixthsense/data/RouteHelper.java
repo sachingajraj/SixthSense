@@ -17,13 +17,14 @@ public class RouteHelper {
         adjBeaconList = BeaconDataHelper.getBeaconAdjacencyList();
         ArrayList<Step> stepList = new ArrayList<>();
         ArrayList<Integer> pathIds = computePathIds(source, destination);
-        for (int i = 0; i < pathIds.size(); ++i){
+        for (int i = 0; i < pathIds.size() - 1; ++i) {
             Beacon stepSource = BeaconDataHelper.getBeaconById(pathIds.get(i));
-            Beacon stepDest = BeaconDataHelper.getBeaconById(pathIds.get(i+1));
+            Beacon stepDest = BeaconDataHelper.getBeaconById(pathIds.get(i + 1));
             String stepMessage = getStepMessage(stepSource, stepDest);
-            Step step= new Step(i, stepSource, stepDest, stepMessage);
+            Step step = new Step(i, stepSource, stepDest, stepMessage);
             stepList.add(step);
         }
+
         return stepList;
     }
 
@@ -31,16 +32,16 @@ public class RouteHelper {
         return new ArrayList<>();
     }
 
-    public static String getStepMessage(Beacon stepSource, Beacon stepDest){
-        for (int i = 0; i < adjBeaconList.size(); ++i ){
-            if (stepSource.getId() == adjBeaconList.get(i).getBid() && stepDest.getId() == adjBeaconList.get(i).getAdjBid()){
+    public static String getStepMessage(Beacon stepSource, Beacon stepDest) {
+        for (int i = 0; i < adjBeaconList.size(); ++i) {
+            if (stepSource.getId() == adjBeaconList.get(i).getBid() && stepDest.getId() == adjBeaconList.get(i).getAdjBid()) {
                 return adjBeaconList.get(i).getTransitionMessage();
             }
         }
         return "";
     }
 
-    public static ArrayList<Integer> computePathIds(Beacon startBeacon, Beacon endBeacon){
+    public static ArrayList<Integer> computePathIds(Beacon startBeacon, Beacon endBeacon) {
 
 
         ArrayList<Integer> path = new ArrayList<>();
@@ -49,25 +50,24 @@ public class RouteHelper {
         parentMap.put(startBeacon.getId(), startBeacon.getId());
         queue.add(startBeacon);
 
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Beacon current = queue.remove();
-            if(current.getId() == endBeacon.getId()) {
+            if (current.getId() == endBeacon.getId()) {
                 int currentId = current.getId();
-                while (currentId != parentMap.get(current.getId())){
+                while (currentId != parentMap.get(currentId)) {
                     path.add(currentId);
-                    currentId = parentMap.get(current.getId());
+                    currentId = parentMap.get(currentId);
                 }
                 path.add(currentId);
                 Collections.reverse(path);
                 return path;
-            }
-            else{
+            } else {
                 ArrayList<Beacon> neighbourBeacons = getNeigbourBeacons(current);
-                if(neighbourBeacons.isEmpty())
+                if (neighbourBeacons.isEmpty())
                     return path;
-                else{
-                    for (Beacon beacon: neighbourBeacons){
-                        if (!(parentMap.containsKey(beacon.getId()))){
+                else {
+                    for (Beacon beacon : neighbourBeacons) {
+                        if (!(parentMap.containsKey(beacon.getId()))) {
                             queue.add(beacon);
                             parentMap.put(beacon.getId(), current.getId());
 
@@ -80,10 +80,10 @@ public class RouteHelper {
         return path;
     }
 
-    public static ArrayList<Beacon> getNeigbourBeacons(Beacon beacon){
+    public static ArrayList<Beacon> getNeigbourBeacons(Beacon beacon) {
         ArrayList<Beacon> neighbourList = new ArrayList<>();
-        for (AdjBeacon adjBeacon :adjBeaconList){
-            if (adjBeacon.getBid() == beacon.getId()){
+        for (AdjBeacon adjBeacon : adjBeaconList) {
+            if (adjBeacon.getBid() == beacon.getId()) {
                 neighbourList.add(BeaconDataHelper.getBeaconById(adjBeacon.getAdjBid()));
             }
         }
